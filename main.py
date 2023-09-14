@@ -14,3 +14,7 @@ def grayscale():
     sheet_array = np.array(gray_sheet)
     return sheet_array
 
+# Apply Gaussian blur and Canny edge detection
+blurred = cv2.GaussianBlur(grayscale(), (5, 5), 0)
+edged = cv2.Canny(blurred, 50, 150)
+
