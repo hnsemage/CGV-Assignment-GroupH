@@ -18,3 +18,21 @@ def grayscale():
 blurred = cv2.GaussianBlur(grayscale(), (5, 5), 0)
 edged = cv2.Canny(blurred, 50, 150)
 
+
+kernel = np.ones((5, 5), np.uint8)
+
+# Dilation
+
+dilated_binary_crop = cv2.dilate(crop, kernel, iterations=1)
+
+cv2.imwrite(
+    'C:\\Users\\ASUS\Desktop\\4th year 2nd semester\\CS402.3 - Computer Graphics and Visulation\\Assignment\\Final Assignment\\GroupH\\ProcessedImages\\dilated_image.jpg',
+    dilated_binary_crop)
+
+# Erosion
+eroded_binary_crop = cv2.erode(dilated_binary_crop, kernel, iterations=1)
+
+cv2.imwrite(
+    'C:\\Users\\ASUS\Desktop\\4th year 2nd semester\\CS402.3 - Computer Graphics and Visulation\\Assignment\\Final Assignment\\GroupH\\ProcessedImages\\eroded_image.jpg',
+    eroded_binary_crop)
+
