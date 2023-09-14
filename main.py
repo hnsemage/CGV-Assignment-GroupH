@@ -41,3 +41,11 @@ plt.hist(eroded_binary_crop.ravel(), 256, [0, 256])
 plt.title( "Histogram")
 plt.savefig("C:\\Users\\ASUS\\Desktop\\4th year 2nd semester\\CS402.3 - Computer Graphics and Visulation\\Assignment\\Final Assignment\\GroupH\\ProcessedImages\\crop_histogram_image.png")
 #plt.show()
+
+# Apply Otsu's thresholding
+_, binary_crop = cv2.threshold(crop, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+# Save or display the binary image
+cv2.imwrite(
+    'C:\\Users\\ASUS\\Desktop\\4th year 2nd semester\\CS402.3 - Computer Graphics and Visulation\\Assignment\\Final Assignment\\GroupH\\CroppedImages\\binary_image.jpg',
+    binary_crop)
