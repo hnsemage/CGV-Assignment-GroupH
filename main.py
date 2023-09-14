@@ -36,3 +36,8 @@ cv2.imwrite(
     'C:\\Users\\ASUS\Desktop\\4th year 2nd semester\\CS402.3 - Computer Graphics and Visulation\\Assignment\\Final Assignment\\GroupH\\ProcessedImages\\eroded_image.jpg',
     eroded_binary_crop)
 
+#Histogram before Otsu's algorithm
+plt.hist(eroded_binary_crop.ravel(), 256, [0, 256])
+plt.title( "Histogram")
+plt.savefig("C:\\Users\\ASUS\\Desktop\\4th year 2nd semester\\CS402.3 - Computer Graphics and Visulation\\Assignment\\Final Assignment\\GroupH\\ProcessedImages\\crop_histogram_image.png")
+#plt.show()
