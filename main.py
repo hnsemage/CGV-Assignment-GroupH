@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 from PIL import Image
+from matplotlib import pyplot as plt
 
 def grayscale():
     # Load the image
@@ -18,8 +19,19 @@ def grayscale():
 blurred = cv2.GaussianBlur(grayscale(), (5, 5), 0)
 edged = cv2.Canny(blurred, 50, 150)
 
+# Find lines in the image using Hough Line Transform
+lines = cv2.HoughLinesP(edged, 1, np.pi / 180, threshold=100, minLineLength=100, maxLineGap=10)
 
+img_cor = [[450, 1300], [430, 2140], [2560, 1375], [2560, 2220]]
+graph_range = [[10,10],[10,3000],[3000,10],[3000,3000]]
+
+pts1 = np.float32(img_cor)
+pts2 = np.float32(graph_range)
+M = cv2.getPerspectiveTransform(pts1, pts2)
+
+crop=cv2.warpPerspective(grayscale(), M, (3000,3000))
 kernel = np.ones((5, 5), np.uint8)
+
 
 # Dilation
 
