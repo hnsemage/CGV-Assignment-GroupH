@@ -26,3 +26,25 @@ def preprocess_image(image):
     edged = cv2.Canny(blurred, 50, 150)
     cv2.imshow("Canny image", edged)
     return edged
+
+# Function to crop the table from an image
+def crop_table(img, img_cor, graph_range):
+    pts1 = np.float32(img_cor)
+    pts2 = np.float32(graph_range)
+    M = cv2.getPerspectiveTransform(pts1, pts2)
+    cropped_img = cv2.warpPerspective(img, M, (3000, 3000))
+    return cropped_img
+
+# Find biggest contour
+def biggest_Contour(contours):
+    biggest = np.array([])
+    maxArea = 0
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        if area > 60:
+            peri = cv2.arcLength(cnt, True)
+            approx = cv2.approxPolyDP(cnt, 0.02 * peri, True)
+            if area > maxArea and len(approx) == 4:
+                biggest = approx
+                maxArea = area
+    return biggest, maxArea
